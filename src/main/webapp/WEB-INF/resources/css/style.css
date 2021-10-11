@@ -1,0 +1,22 @@
+.section{
+	
+	width: 100%;
+	height: 100vh;
+	background-color: blue;
+	float:right;
+}
+
+.sidebar {
+	background-color: aliceblue;
+	width : 20%;
+	height : 65%;
+	float:left;
+	margin : 0;
+	padding-top:15em;
+
+	margin-bottom:20em;
+}
+
+body{
+	margin : 0;
+}
