@@ -1,6 +1,19 @@
 package com.todo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.stereotype.Component;
+
+@Entity
 public class Card {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
 	private String title;
 	private String text;
 	
@@ -17,9 +30,15 @@ public class Card {
 		this.text = text;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "Card [title=" + title + ", text=" + text + "]";
+		return "Card [id=" + id + ", title=" + title + ", text=" + text + "]";
 	}
 	
 }
