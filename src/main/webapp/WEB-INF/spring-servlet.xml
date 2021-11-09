@@ -71,6 +71,9 @@
 	<bean class="com.todo.daoImpl.CardDaoImpl" name="cardDao">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<bean class="com.todo.service.CardService" name="cardService">
+		<property name="cardDao" ref="cardDao"/>
+	</bean>
 	<bean
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager"
 		name="transactionManager">
