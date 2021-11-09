@@ -1,10 +1,19 @@
 .todos {
-	display: flex;
-	justify-content: flex-start;	
+	display: block;
+	/*justify-content: flex-start;*/
 	margin-left:20px;
+	/* height : 40%; */
 }
 
-
+p{
+	text-overflow: ellipsis;
+	white-space: pre-wrap;
+}
+.actions{
+	
+	display: block;
+	
+}
 .section {
 	display: flex;
 	flex-direction: row;

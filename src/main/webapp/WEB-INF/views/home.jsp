@@ -15,8 +15,7 @@
 			<h1 class="sidebar-heading">TO-DO</h1>
 			<ul>
 				<li><button type="button" class="btn btn-primary"
-						data-toggle="modal" data-target="#exampleModal">Add
-						Todo-Card</button></li>
+						data-toggle="modal" data-target="#addModal">Add Todo-Card</button></li>
 				<li><a href="">Sign In</a></li>
 				<li><a href="">Log in</a></li>
 				<li><a href="">Settings</a></li>
@@ -24,32 +23,71 @@
 		</div>
 
 		<c:forEach items="${cards}" var="card">
-			<div class="text-center todos ">
-				<div class="card mt-5 mr-1" style="width: 15rem;">
-					<div class="card-body">
-						<h5 class="card-title">${card.title}</h5>
-						<p class="card-text">${card.text}</p>
-						<a href="${pageContext.request.contextPath}/deleteCard/${card.id}" class="btn btn-danger">Delete</a>
+			<div class="card mt-5 mr-1 todos text-center" style="width: 18rem;">
+				<div class="card-body text-center">
+					<h5 class="card-title text-center">${card.title}</h5>
+					<hr>
+					<p class="card-text">${card.text}</p>
+					<div class="actions">
+						<hr>
+						<a href="${pageContext.request.contextPath}/deleteCard/${card.id}"
+							class="btn btn-danger btn-outline-danger">Delete</a> 
+						<button type="button" class="btn btn-warning btn-outline-warning"
+						data-toggle="modal" data-target="#editModal">Edit</button>
 					</div>
+						<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+							aria-labelledby="editModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Edit Card</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body ">
+										<form action="createOrUpdateCard" method="POST">
+											<div class="form-group">
+												<label for="id">ID</label> <input type="number"
+													class="form-control" id="id" name="id"
+													value="${card.id}">
+											</div>
+											<div class="form-group">
+												<label for="title">Title</label> <input type="text"
+													class="form-control" id="title" name="title"
+													value="${card.title}">
+											</div>
+											<div class="form-group">
+												<label for="text">Text</label>
+												<textarea type="text" class="form-control" id="text"
+													name="text" placeholder="Add todos here">${card.text}</textarea>
+											</div>
+											<button type="submit" class="btn btn-warning">Update</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="addModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Add Card</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body ">
-					<form action="createCard" method="POST">
+					<form action="createOrUpdateCard" method="POST">
 						<div class="form-group">
 							<label for="title">Title</label> <input type="text"
 								class="form-control" id="title" name="title"
@@ -63,8 +101,9 @@
 						<button type="submit" class="btn btn-primary">Create</button>
 					</form>
 				</div>
-			</div> 
+			</div>
 		</div>
 	</div>
+
 </body>
 </html>

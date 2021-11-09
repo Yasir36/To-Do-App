@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.todo.dao.CardDao;
+import com.todo.service.CardService;
 import com.todo.model.Card;
 
 @Controller
 public class MainController {
 	
 	@Autowired
-	private CardDao cardDao;
+	private CardService cardService;
 	
 	@RequestMapping("/")
 	public String home(HttpServletRequest request)
 	{
-		request.setAttribute("cards", cardDao.getAllCards());
+		request.setAttribute("cards", cardService.getAll());
 		return "home";
 	}
 	
-	@RequestMapping(value="/createCard",method = RequestMethod.POST)
+	@RequestMapping(value="/createOrUpdateCard",method = RequestMethod.POST)
 	public RedirectView handleCreation(@ModelAttribute Card card, HttpServletRequest request)
 	{
-		cardDao.createOrUpdateCard(card);
+		cardService.createOrUpdate(card);
 		return new RedirectView(request.getContextPath()+"/");
 	}
 	
 	@RequestMapping("/deleteCard/{cardId}")	
-	public RedirectView handleProduct(@PathVariable("cardId") int cardId, HttpServletRequest request)
+	public RedirectView handleDeletion(@PathVariable("cardId") int cardId, HttpServletRequest request)
 	{
-		cardDao.removeCard(cardId);
+		cardService.remove(cardId);
 		return new RedirectView(request.getContextPath()+"/");
 	}
 }
